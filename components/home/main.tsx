@@ -16,7 +16,7 @@ export default function Home({posts, userId}: { posts: unknown[], userId: string
 
     return (
         <div className="mt-8 px-5">
-            <div className="flex flex-row gap-3 w-full">
+            <div className="flex flex-row gap-3 w-full flex-wrap">
                 <ModeSelect value={modeValue} setValue={setModeValue} />
                 {modeValue === "Por data" && (
                     <CalendarDatePicker value={dateValue} setValue={setDateValue} />
