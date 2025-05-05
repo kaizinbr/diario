@@ -4,3 +4,28 @@
 @import "tw-animate-css";
 
 @custom-variant dark (&:where(.dark, .dark *));
+
+
+.m_38a85659, .mantine-Popover-dropdown {
+    @apply !rounded-xl !shadow-lg border !border-gray-300;
+}
+
+.m_396ce5cb  {
+    @apply !rounded-xl !border-gray-300;
+}
+.m_396ce5cb [aria-selected="true"] {
+    @apply !bg-blue-500 !text-white;
+}
+.m_396ce5cb [aria-selected="true"]:hover {
+    @apply !bg-blue-600;
+}
+.m_396ce5cb [aria-selected="true"]:active {
+    @apply !bg-blue-700;
+}
+.m_396ce5cb [aria-selected="true"]:focus {
+    @apply !outline-none !ring-2 !ring-blue-500;
+}
+
+.mantine-Combobox-option[data-combobox-active="true"] {
+    @apply !bg-neutral-700 !text-white;
+}

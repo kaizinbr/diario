@@ -24,6 +24,8 @@ import { Underline } from "@tiptap/extension-underline";
 import { Link } from "@/components/tiptap-extension/link-extension";
 import { Selection } from "@/components/tiptap-extension/selection-extension";
 import { TrailingNode } from "@/components/tiptap-extension/trailing-node-extension";
+import Emoji from '@tiptap-pro/extension-emoji'
+
 
 // --- UI Primitives ---
 import { Button } from "@/components/tiptap-ui-primitive/button";
@@ -350,6 +352,9 @@ export function SimpleEditor({
             Superscript,
             Subscript,
 
+    Emoji.configure({
+        enableEmoticons: true,
+      }),  
             Selection,
             ImageUploadNode.configure({
                 accept: "image/*",

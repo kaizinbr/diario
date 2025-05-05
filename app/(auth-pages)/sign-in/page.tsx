@@ -22,7 +22,7 @@ export default async function Login(props: { searchParams: Promise<Message> }) {
                     <div className="flex justify-between items-center">
                         <Label htmlFor="password">Senha</Label>
                         <Link
-                            className="text-xs text-neutral-300 underline"
+                            className="text-xs underline"
                             href="/forgot-password"
                         >
                             Esqueci a senha
@@ -57,7 +57,7 @@ export default async function Login(props: { searchParams: Promise<Message> }) {
                     <BsGoogle className="size-5 mr-3" />
                     Entrar com Google
                 </button> */}
-                <div className="text-base text-neutral-300 flex items-center flex-col w-full gap-2 mt-6 font-medium">
+                <div className="text-base text-neutral- flex items-center flex-col w-full gap-2 mt-6 font-medium">
                     <p className="">Não tem uma conta?</p>
                     <Link
                         href="/sign-up"
