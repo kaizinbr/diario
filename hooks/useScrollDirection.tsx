@@ -1,5 +1,5 @@
 
-import { useState, useCallback, useEffect, useRef } from "react";
+import { useState, useEffect, useRef } from "react";
 const THRESHOLD = 0;
 
 const useScrollDirection = () => {

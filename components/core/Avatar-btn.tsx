@@ -1,25 +1,13 @@
 "use client";
 
-import { Menu, Avatar } from "@mantine/core";
+import {  Avatar } from "@mantine/core";
 
-import { Settings, LogOut, User } from "lucide-react";
-import { createClient } from "@/utils/supabase/client";
-import { useRouter } from "next/navigation";
 
 export default function AvatarBtn({ avatar_url }: { avatar_url: string }) {
-    const router = useRouter();
-    const supabase = createClient();
+
 
     const url = `https://ehgrxskoduebhqzayeii.supabase.co/storage/v1/object/public/avatars/${avatar_url}`;
 
-    const handleLogout = async () => {
-        const { error } = await supabase.auth.signOut();
-        if (error) {
-            console.error("Error signing out:", error);
-        } else {
-            router.push("/auth/login");
-        }
-    };
 
     return (
         // <Menu offset={12}
