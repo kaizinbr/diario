@@ -19,11 +19,11 @@ export default async function ForgotPassword(props: {
             <form className="flex-1 flex flex-col min-w-64 rounded-2xl py-8 px-5 bg-bunker-800">
                 <div>
                     <h1 className="text-2xl font-bold">Redefinir senha</h1>
-                    <p className="text-sm text-neutral-300">
+                    <p className="text-sm text-neutral-700">
                         Lembra da senha?{" "}
                         <Link
-                            className="text-neutral-300 font-medium underline"
-                            href="/sign-in"
+                            className="text-neutral-700 font-medium underline"
+                            href="/login"
                         >
                             Entre por aqui
                         </Link>
@@ -36,7 +36,7 @@ export default async function ForgotPassword(props: {
                         placeholder="you@example.com"
                         required
                     />
-                    <SubmitButton className="rounded-xl text-center !font-medium bg-main-500 border-2 border-main-500 hover:bg-main-600 hover:border-main-600 transition-all duration-200" formAction={forgotPasswordAction}>
+                    <SubmitButton className="rounded-xl text-center py-3 border border-neutral-900 cursor-pointer !font-semibold bg-neutral-900 text-neutral-500 hover:bg-main-600 hover:border-main-600 transition-all duration-200" formAction={forgotPasswordAction}>
                         Redefinir senha
                     </SubmitButton>
                     <FormMessage message={searchParams} />

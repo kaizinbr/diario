@@ -1,12 +1,12 @@
 .tiptap-tooltip {
-  --tt-tooltip-bg: var(--tt-gray-light-900);
+  --tt-tooltip-bg: var(--tt-neutral-light-900);
   --tt-tooltip-text: var(--white);
-  --tt-kbd: var(--tt-gray-dark-a-400);
+  --tt-kbd: var(--tt-neutral-dark-a-400);
 
   .dark & {
     --tt-tooltip-bg: var(--white);
-    --tt-tooltip-text: var(--tt-gray-light-600);
-    --tt-kbd: var(--tt-gray-light-a-400);
+    --tt-tooltip-text: var(--tt-neutral-light-600);
+    --tt-kbd: var(--tt-neutral-light-a-400);
   }
 }
 

@@ -9,7 +9,7 @@ export default function Providers({
     return (
         <ThemeProvider
             attribute="class"
-            defaultTheme="system"
+            defaultTheme="light"
             enableSystem
             disableTransitionOnChange
         >

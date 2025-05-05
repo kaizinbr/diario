@@ -14,7 +14,7 @@ export default async function Login(props: { searchParams: Promise<Message> }) {
     const searchParams = await props.searchParams;
     return (
         <div className="w-full min-h-screen p-5 flex justify-center items-center">
-            <form className="flex-1 flex flex-col min-w-64 rounded-2xl py-8 px-5 bg-bunker-800">
+            <form className="flex-1 flex flex-col min-w-64 rounded-2xl py-8 px-5 ">
                 <h1 className="text-2xl font-bold">Entre com sua conta</h1>
                 <div className="flex flex-col gap-2 [&>input]:mb-3 mt-8">
                     <Label htmlFor="email">Email</Label>
@@ -35,7 +35,7 @@ export default async function Login(props: { searchParams: Promise<Message> }) {
                         required
                     />
                     <SubmitButton
-                        className="rounded-xl text-center !font-medium bg-main-500 border-2 border-main-500 hover:bg-main-600 hover:border-main-600 transition-all duration-200"
+                        className="rounded-xl text-center py-3 border border-neutral-900 cursor-pointer !font-semibold bg-neutral-900 text-neutral-50 hover:bg-main-600 hover:border-main-600 transition-all duration-200"
                         pendingText="Entrando..."
                         formAction={signInAction}
                     >
@@ -57,11 +57,11 @@ export default async function Login(props: { searchParams: Promise<Message> }) {
                     <BsGoogle className="size-5 mr-3" />
                     Entrar com Google
                 </button> */}
-                <div className="text-base text-neutral- flex items-center flex-col w-full gap-2 mt-6 font-medium">
+                <div className="text-base text-neutral-900 flex items-center flex-col w-full gap-2 mt-6 font-medium">
                     <p className="">Não tem uma conta?</p>
                     <Link
                         href="/sign-up"
-                        className="w-full border border-bunker-600 rounded-xl p-2 text-center transition-all duration-200 hover:border-main-600"
+                        className="w-full border border-neutral-900 !font-semibold rounded-xl p-2 text-center transition-all duration-200 hover:border-main-600"
                     >
                         Crie uma conta
                     </Link>

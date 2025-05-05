@@ -15,7 +15,7 @@ export default function Home({posts, userId}: { posts: unknown[], userId: string
     const [modeValue, setModeValue] = useState<string | null>("Por data");
 
     return (
-        <div className="h-[200vh] mt-8 px-5">
+        <div className="mt-8 px-5">
             <div className="flex flex-row gap-3 w-full">
                 <ModeSelect value={modeValue} setValue={setModeValue} />
                 {modeValue === "Por data" && (

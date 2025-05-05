@@ -12,7 +12,7 @@ export default function AvatarBtn({ avatar_url }: { avatar_url: string }) {
     return (
         // <Menu offset={12}
         //     classNames={{
-        //         dropdown: "bg-white border !border-gray-300 !rounded-2xl",
+        //         dropdown: "bg-white border !border-neutral-300 !rounded-2xl",
         //         item: "hover:bg-[#2C2D2F] hover:text-white",
         //     }}
         // >

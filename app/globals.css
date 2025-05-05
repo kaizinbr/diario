@@ -7,11 +7,11 @@
 
 
 .m_38a85659, .mantine-Popover-dropdown {
-    @apply !rounded-xl !shadow-lg border !border-gray-300;
+    @apply !rounded-xl !shadow-lg border !border-neutral-300;
 }
 
 .m_396ce5cb  {
-    @apply !rounded-xl !border-gray-300;
+    @apply !rounded-xl !border-neutral-300;
 }
 .m_396ce5cb [aria-selected="true"] {
     @apply !bg-blue-500 !text-white;

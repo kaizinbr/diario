@@ -11,7 +11,7 @@ export default async function Layout({ children }: { children: React.ReactNode }
 
     return (
         <>
-            <main>{children}</main>
+            <main className='max-w-2xl mx-auto w-full'>{children}</main>
             <Navigator user={user} />
         </>
     );

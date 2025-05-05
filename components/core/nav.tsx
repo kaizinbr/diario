@@ -8,7 +8,7 @@ import { AnimatePresence, motion } from "motion/react";
 
 import { useState, useCallback, useEffect } from "react";
 import { createClient } from "@/utils/supabase/client";
-import { User, Settings, LogOut, ChevronUp } from "lucide-react";
+import { User, Settings, LogOut, ChevronUp, Home, Folder } from "lucide-react";
 
 import useScrollDirection from "@/hooks/useScrollDirection";
 
@@ -16,6 +16,7 @@ import { type User as UserType } from "@supabase/supabase-js";
 import AvatarBtn from "@/components/core/Avatar-btn";
 
 export default function Navigator({ user }: { user: UserType | null }) {
+    // console.log(user)
     const pathname = usePathname();
     const supabase = createClient();
 
@@ -48,7 +49,12 @@ export default function Navigator({ user }: { user: UserType | null }) {
     }, [user, supabase]);
 
     useEffect(() => {
-        getProfile();
+        if (user) {
+            getProfile();
+        } else {
+            console.log("User not found!");
+        }
+
     }, [user, getProfile]);
 
     useEffect(() => {
@@ -89,13 +95,14 @@ export default function Navigator({ user }: { user: UserType | null }) {
                     transition-all duration-300 z-[999]
                     mx-auto flex items-center justify-evenly
                     backdrop-blur-xl
-                    bg-white/90 border border-gray-300
+                    bg-white/90 border border-neutral-300
                     rounded-2xl p-3
                     shadow-lg  max-w-full
                     
                 `}
             >
-                <motion.div
+                {user ? (
+                    <motion.div
                     initial={{ height: "auto" }}
                     animate={{
                         height: isExpanded ? "300px" : "44px",
@@ -120,11 +127,33 @@ export default function Navigator({ user }: { user: UserType | null }) {
                                 className="flex flex-row flex-wrap items-center gap-3 w-full"
                             >
                                 <Link
-                                    href="/settings"
+                                    href="/"
                                     className={`
-                                            bg-gray-200 text-black rounded-xl text-xs
+                                            bg-neutral-200 text-black rounded-xl text-xs
                                             p-2 size-18 flex flex-col items-center gap-1 justify-center 
-                                            hover:bg-gray-300 transition-colors duration-200 ease-in-out
+                                            hover:bg-neutral-300 transition-colors duration-200 ease-in-out
+                                        `}
+                                >
+                                    <Home className="h-4" />
+                                    Home
+                                </Link>
+                                <Link
+                                    href="#"
+                                    className={`
+                                            bg-neutral-200 text-black rounded-xl text-xs
+                                            p-2 size-18 flex flex-col items-center gap-1 justify-center 
+                                            hover:bg-neutral-300 transition-colors duration-200 ease-in-out
+                                        `}
+                                >
+                                    <Folder className="h-4" />
+                                    Organizar
+                                </Link>
+                                <Link
+                                    href="/me"
+                                    className={`
+                                            bg-neutral-200 text-black rounded-xl text-xs
+                                            p-2 size-18 flex flex-col items-center gap-1 justify-center 
+                                            hover:bg-neutral-300 transition-colors duration-200 ease-in-out
                                         `}
                                 >
                                     <User className="h-4" />
@@ -133,20 +162,20 @@ export default function Navigator({ user }: { user: UserType | null }) {
                                 <Link
                                     href="/settings"
                                     className={`
-                                            bg-gray-200 text-black rounded-xl text-xs
+                                            bg-neutral-200 text-black rounded-xl text-xs
                                             p-2 size-18 flex flex-col items-center gap-1 justify-center  
-                                            hover:bg-gray-300 transition-colors duration-200 ease-in-out
+                                            hover:bg-neutral-300 transition-colors duration-200 ease-in-out
                                         `}
                                 >
                                     <Settings className="h-4" />
                                     Config.
                                 </Link>
                                 <Link
-                                    href="/settings"
+                                    href="/logout"
                                     className={`
-                                            bg-gray-200 text-black rounded-xl text-xs
+                                            bg-neutral-200 text-black rounded-xl text-xs
                                             p-2 size-18 flex flex-col items-center gap-1 justify-center 
-                                            hover:bg-gray-300 transition-colors duration-200 ease-in-out
+                                            hover:bg-neutral-300 transition-colors duration-200 ease-in-out
                                         `}
                                 >
                                     <LogOut className="h-4" />
@@ -190,7 +219,34 @@ export default function Navigator({ user }: { user: UserType | null }) {
                             Pensamento
                         </Link>
                     </div>
-                </motion.div>
+                </motion.div>) : (
+                    <div className="flex flex-row gap-3 items-center justify-center">
+                        <Link
+                            href="/login"
+                            className={`
+                                flex cursor-pointer
+                                flex-col items-center gap-1
+                                bg-black rounded-xl text-white
+                                px-6 py-2
+                                transition-all duration-200 ease-in-out
+                            `}
+                        >
+                            Entrar
+                        </Link>
+                        <Link
+                            href="/sign-up"
+                            className={`
+                                flex cursor-pointer
+                                flex-col items-center gap-1
+                                bg-black rounded-xl text-white
+                                px-6 py-2
+                                transition-all duration-200 ease-in-out
+                            `}
+                        >
+                            Cadastrar
+                        </Link>
+                    </div>
+                )}
             </motion.nav>
         </div>
     );

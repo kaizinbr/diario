@@ -24,8 +24,7 @@ import { Underline } from "@tiptap/extension-underline";
 import { Link } from "@/components/tiptap-extension/link-extension";
 import { Selection } from "@/components/tiptap-extension/selection-extension";
 import { TrailingNode } from "@/components/tiptap-extension/trailing-node-extension";
-import Emoji from '@tiptap-pro/extension-emoji'
-
+import Emoji from "@tiptap-pro/extension-emoji";
 
 // --- UI Primitives ---
 import { Button } from "@/components/tiptap-ui-primitive/button";
@@ -190,18 +189,12 @@ const MobileToolbarContent = ({
     </>
 );
 
-export function SimpleEditor({
+export function DisplayEditor({
     id,
     initialContent,
-    loggedId,
-    authorId,
-    isPublic,
 }: {
     id: string;
     initialContent: object;
-    loggedId: string;
-    authorId: string;
-    isPublic: boolean;
 }) {
     console.log("initialContent", initialContent);
     const supabase = createClient();
@@ -220,7 +213,6 @@ export function SimpleEditor({
         height: 0,
     });
     const toolbarRef = React.useRef<HTMLDivElement>(null);
-
 
     React.useEffect(() => {
         const updateRect = () => {
@@ -261,75 +253,16 @@ export function SimpleEditor({
             Typography,
             Superscript,
             Subscript,
-
-    Emoji.configure({
-        enableEmoticons: true,
-      }),  
-            Selection,
-            ImageUploadNode.configure({
-                accept: "image/*",
-                maxSize: MAX_FILE_SIZE,
-                limit: 3,
-                upload: handleImageUpload,
-                onError: (error) => console.error("Upload failed:", error),
+            Emoji.configure({
+                enableEmoticons: true,
             }),
+            Selection,
             TrailingNode,
             Link.configure({ openOnClick: false }),
         ],
         content: initialContent,
-        onUpdate: ({ editor }) => {
-            const json = editor.getJSON();
-            console.log("Editor content:", json);
-            // Save the content to the database
-            supabase
-                .from("posts")
-                .update({ content: json })
-                .eq("room", id)
-                .then(() => {
-                    console.log("Content updated successfully!");
-                })
 
-            // Check if the first element is a heading
-            // and if it has a title
-            if (json.content) {
-                const title =
-                    json.content[0].content && json.content[0].type == "heading"
-                        ? json.content[0].content[0].text
-                        : "";
-                console.log("title:", title);
-
-                supabase
-                    .from("posts")
-                    .update({ title: title })
-                    .eq("room", id)
-                    .then(() => {
-                        console.log("Title updated successfully!");
-                    });
-            }
-
-            // Check if the first element is a image
-            // and if it has a image
-            if (json.content) {
-                let image = "";
-                if (json.content) {
-                    for (const node of json.content) {
-                        if (node.type === "image" && node.attrs?.src) {
-                            image = node.attrs.src;
-                            break;
-                        }
-                    }
-                }
-                console.log("image:", image);
-
-                supabase
-                    .from("posts")
-                    .update({ image: image })
-                    .eq("room", id)
-                    .then(() => {
-                        console.log("Image updated successfully!");
-                    });
-            }
-        },
+        editable: false,
     });
 
     React.useEffect(() => {
@@ -375,47 +308,14 @@ export function SimpleEditor({
     }, [isMobile, mobileView]);
 
     return (
-                <EditorContext.Provider value={{ editor }}>
-                    <PostBar id={id} authorId={authorId} loggedId={loggedId} isPublic={isPublic} />
-                    <Toolbar
-                        ref={toolbarRef}
-                        style={
-                            isMobile
-                                ? {
-                                      bottom: `calc(100% - ${
-                                          windowSize.height - rect.y
-                                      }px)`,
-                                  }
-                                : {}
-                        }
-                    >
-                        {mobileView === "main" ? (
-                            <MainToolbarContent
-                                onHighlighterClick={() =>
-                                    setMobileView("highlighter")
-                                }
-                                onLinkClick={() => setMobileView("link")}
-                                isMobile={isMobile}
-                            />
-                        ) : (
-                            <MobileToolbarContent
-                                type={
-                                    mobileView === "highlighter"
-                                        ? "highlighter"
-                                        : "link"
-                                }
-                                onBack={() => setMobileView("main")}
-                            />
-                        )}
-                    </Toolbar>
-
-                    <div className="content-wrapper">
-                        <EditorContent
-                            editor={editor}
-                            role="presentation"
-                            className="simple-editor-content"
-                        />
-                    </div>
-                </EditorContext.Provider>
+        <EditorContext.Provider value={{ editor }}>
+            <div className="content-wrapper">
+                <EditorContent
+                    editor={editor}
+                    role="presentation"
+                    className="simple-editor-content"
+                />
+            </div>
+        </EditorContext.Provider>
     );
 }

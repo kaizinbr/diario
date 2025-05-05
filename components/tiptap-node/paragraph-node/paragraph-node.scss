@@ -1,9 +1,9 @@
 .tiptap.ProseMirror {
-  --blockquote-bg-color: var(--tt-gray-light-900);
+  --blockquote-bg-color: var(--tt-neutral-light-900);
   --link-text-color: var(--tt-brand-color-500);
-  --separator-color: var(--tt-gray-light-a-200);
-  --thread-text: var(--tt-gray-light-900);
-  --placeholder-color: var(--tt-gray-light-a-400);
+  --separator-color: var(--tt-neutral-light-a-200);
+  --thread-text: var(--tt-neutral-light-900);
+  --placeholder-color: var(--tt-neutral-light-a-400);
 
   // Highlight variables
   --tt-highlight-green: #dcfce7;
@@ -18,15 +18,15 @@
   --tt-highlight-yellow-contrast: #fbe604;
 
   // Mathematics variables
-  --tiptap-mathematics-bg-color: var(--tt-gray-light-a-200);
+  --tiptap-mathematics-bg-color: var(--tt-neutral-light-a-200);
   --tiptap-mathematics-border-color: var(--tt-brand-color-500);
 
   .dark & {
-    --blockquote-bg-color: var(--tt-gray-dark-900);
+    --blockquote-bg-color: var(--tt-neutral-dark-900);
     --link-text-color: var(--tt-brand-color-400);
-    --separator-color: var(--tt-gray-dark-a-200);
-    --thread-text: var(--tt-gray-dark-900);
-    --placeholder-color: var(--tt-gray-dark-a-400);
+    --separator-color: var(--tt-neutral-dark-a-200);
+    --thread-text: var(--tt-neutral-dark-900);
+    --placeholder-color: var(--tt-neutral-dark-a-400);
 
     --tt-highlight-green: #509568;
     --tt-highlight-green-contrast: #47855d;
@@ -39,7 +39,7 @@
     --tt-highlight-yellow: #6b6524;
     --tt-highlight-yellow-contrast: #58531e;
 
-    --tiptap-mathematics-bg-color: var(--tt-gray-dark-a-200);
+    --tiptap-mathematics-bg-color: var(--tt-neutral-dark-a-200);
     --tiptap-mathematics-border-color: var(--tt-brand-color-400);
   }
 }

@@ -67,10 +67,14 @@ export const updateSession = async (request: NextRequest) => {
         if (request.nextUrl.pathname.includes("/notifications") && user.error) {
             return NextResponse.redirect(new URL("/sign-in", request.url));
         }
-
-        if (request.nextUrl.pathname === "/" && !user.error) {
-            return NextResponse.redirect(new URL("/home", request.url));
+        
+        if (request.nextUrl.pathname === "/" && user.error) {
+            return NextResponse.redirect(new URL("/out", request.url));
         }
+
+        // if (request.nextUrl.pathname === "/" && !user.error) {
+        //     return NextResponse.redirect(new URL("/home", request.url));
+        // }
 
         return response;
     } catch (e) {

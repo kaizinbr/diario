@@ -146,16 +146,16 @@ export default function CardPost({
         `}
         >
             <Link
-                // href={`/${edit ? "compose" : "p"}/${post.room}`}
-                href="#"
+                href={`/p/${post.room}`}
+                // href="#"
                 className={`
-                    border border-gray-400 bg-transparent rounded-3xl p-4
+                    border border-neutral-400 bg-transparent rounded-3xl p-4
                     flex flex-col gap-2
                     shadow-none hover:shadow-lg 
                     !transition-all !duration-200 !ease-in-out
                 `}
             >
-                <span className="text-xs text-gray-500">
+                <span className="text-xs text-neutral-500">
                     {new Date(post.created_at).toLocaleDateString()}
                 </span>
                 {title && title.length > 0 && (
@@ -164,7 +164,7 @@ export default function CardPost({
                 <div className="flex flex-col gap-3 pt-2 pb-0 max-h-[500px] overflow-clip displaying">
                     {output && (
                         <div
-                            className="text-sm text-gray-600 mb-2 cardContent cardPostProseMirror"
+                            className="text-sm text-neutral-600 mb-2 cardContent cardPostProseMirror"
                             dangerouslySetInnerHTML={{ __html: output }}
                         ></div>
                     )}

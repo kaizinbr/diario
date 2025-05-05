@@ -175,29 +175,19 @@ export const signInAction = async (formData: FormData) => {
 
     if (error) {
         if (error.code === "invalid_credentials") {
-            const isGoogleUser = await checkUserProvider(email)
-
-            if (isGoogleUser) {
-                return encodedRedirect(
-                    "error",
-                    "/sign-in",
-                    "Parece que você se cadastrou com o Google, tente fazer login com o Google ou redefinir sua senha"
-                );
-            } else {
-                console.error(error.code + " " + error.message);
-                return encodedRedirect(
-                    "error",
-                    "/sign-in",
-                    "Credenciais inválidas, verifique as informações e tente novamente"
-                );
-            }
+            console.error(error.code + " " + error.message);
+            return encodedRedirect(
+                "error",
+                "/login",
+                "Credenciais inválidas, verifique as informações e tente novamente"
+            );
         } else {
             console.error(error.code + " " + error.message);
-            return encodedRedirect("error", "/sign-in", error.message);
+            return encodedRedirect("error", "/login", error.message);
         }
     }
 
-    return redirect("/home");
+    return redirect("/");
 };
 
 export const forgotPasswordAction = async (formData: FormData) => {

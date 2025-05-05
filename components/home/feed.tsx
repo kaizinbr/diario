@@ -19,14 +19,14 @@ import { useState, useEffect } from "react";
 //     return (
 //         <div
 //             className={`
-//                 border border-gray-300 bg-white rounded-3xl p-4
+//                 border border-neutral-300 bg-white rounded-3xl p-4
 //                 flex flex-col gap-2
 //             `}
 //         >
 //             {title && title.length > 0 && (
 //                 <h1 className="text-lg font-bold">{title}</h1>
 //             )}
-//             <p className="text-sm text-gray-500 mb-2">{description}</p>
+//             <p className="text-sm text-neutral-500 mb-2">{description}</p>
 //             {imageSrc && (
 //                 <picture className=" w-full max-h-[300px] overflow-hidden rounded-2xl flex justify-center items-center">
 //                     <Image
@@ -38,7 +38,7 @@ import { useState, useEffect } from "react";
 //                     />
 //                 </picture>
 //             )}
-//             <span className="text-xs text-gray-500">
+//             <span className="text-xs text-neutral-500">
 //                 {date.toLocaleDateString()}
 //             </span>
 //         </div>
@@ -125,14 +125,14 @@ export default function Feed({
 
                 {loading && (
                     <div className="flex justify-center items-center h-20">
-                        <span className="text-gray-500">Loading...</span>
+                        <span className="text-neutral-500">Loading...</span>
                     </div>
                 )}
 
                 {/* Se não houver posts e não estiver carregando, exibe uma mensagem */}
                 {feedPosts.length === 0 && !loading && (
                     <div className="flex justify-center items-center h-20">
-                        <span className="text-gray-500">
+                        <span className="text-neutral-500">
                             Nenhum post ainda...
                         </span>
                     </div>
@@ -141,12 +141,12 @@ export default function Feed({
                 {/* Example Post Cards */}
                 {/* <div
                     className={`
-                    border border-gray-400 rounded-3xl p-4
+                    border border-neutral-400 rounded-3xl p-4
                     flex flex-col gap-2
                 `}
                 >
                     <h1 className="text-lg font-bold">Post 1</h1>
-                    <p className="text-sm text-gray-500 mb-2">
+                    <p className="text-sm text-neutral-500 mb-2">
                         Lorem ipsum dolor sit amet, consectetur adipiscing elit.
                         Sed do eiusmod tempor incididunt ut labore et dolore
                         magna aliqua.
@@ -160,18 +160,18 @@ export default function Feed({
                             className="size-full object-cover "
                         />
                     </picture>
-                    <span className="text-xs text-gray-500">
+                    <span className="text-xs text-neutral-500">
                         {value.toLocaleDateString()}
                     </span>
                 </div>
                 <div
                     className={`
-                    border border-gray-300 bg-white rounded-3xl p-4
+                    border border-neutral-300 bg-white rounded-3xl p-4
                     flex flex-col gap-2
                 `}
                 >
                     <h1 className="text-lg font-bold">Post 1</h1>
-                    <p className="text-sm text-gray-500 mb-2">
+                    <p className="text-sm text-neutral-500 mb-2">
                         Lorem ipsum dolor sit amet, consectetur adipiscing elit.
                         Sed do eiusmod tempor incididunt ut labore et dolore
                         magna aliqua.
@@ -185,7 +185,7 @@ export default function Feed({
                             className="size-full object-cover "
                         />
                     </picture>
-                    <span className="text-xs text-gray-500">
+                    <span className="text-xs text-neutral-500">
                         {value.toLocaleDateString()}
                     </span>
                 </div> */}

@@ -49,7 +49,7 @@ export default async function Signup(props: {
                         required
                     />
                     <SubmitButton
-                        className="rounded-xl text-center !font-medium bg-main-500 border-2 border-main-500 hover:bg-main-600 hover:border-main-600 transition-all duration-200"
+                        className="rounded-xl text-center py-3 border border-neutral-900 cursor-pointer !font-semibold bg-neutral-900 text-neutral-50 hover:bg-main-600 hover:border-main-600 transition-all duration-200"
                         formAction={signUpAction}
                         pendingText="Cadastrando..."
                     >
@@ -57,25 +57,11 @@ export default async function Signup(props: {
                     </SubmitButton>
                     <FormMessage message={searchParams} />
                 </div>
-                {/* <button
-                    type="button"
-                    onClick={signUpWithGoogle}
-                    className={`
-                        w-full mt-3
-                        border border-bunker-600 rounded-xl
-                        p-2 text-center transition-all duration-200
-                        hover:border-main-600 cursor-pointer
-                        flex items-center justify-center
-                    `}
-                >
-                    <BsGoogle className="size-5 mr-3" />
-                    Criar conta com Google
-                </button> */}
-                <div className="text-base text-neutral-300 flex items-center flex-col w-full gap-2 mt-6 font-medium">
+                <div className="text-base text-neutral-900 flex items-center flex-col w-full gap-2 mt-6 font-medium">
                     <p className="">Já tem uma conta?</p>
                     <Link
-                        href="/sign-in"
-                        className="w-full border border-bunker-600 rounded-xl p-2 text-center transition-all duration-200 hover:border-main-600"
+                        href="/login"
+                        className="w-full border border-neutral-900 font-semibold rounded-xl p-2 text-center transition-all duration-200 hover:border-main-600"
                     >
                         Entre por aqui
                     </Link>

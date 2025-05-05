@@ -10,6 +10,7 @@ import { Trash2 } from "lucide-react";
 // mantine
 import { useDisclosure } from "@mantine/hooks";
 import { Modal, LoadingOverlay } from "@mantine/core";
+import Link from "next/link";
 
 export default function PostBar({
     id,
@@ -80,14 +81,14 @@ export default function PostBar({
                 centered
                 withCloseButton={false}
                 classNames={{
-                    content: "rounded-lg bg-white dark:bg-gray-800",
+                    content: "rounded-lg bg-white dark:bg-neutral-800",
                     header: "rounded-t-lg",
                     close: "rounded-tr-lg",
                 }}
             >
                 <div className="flex flex-col gap-4">
                     <h1 className="text-lg font-semibold">Deletar post</h1>
-                    <p className="text-sm text-gray-500">
+                    <p className="text-sm text-neutral-500">
                         Tem certeza que deseja deletar esse post? Essa ação não
                         pode ser desfeita.
                     </p>
@@ -102,7 +103,7 @@ export default function PostBar({
                         </button>
                         <button
                             onClick={() => close()}
-                            className="px-4 py-2 rounded-xl bg-gray-200 text-gray-800 cursor-pointer font-semibold w-1/2"
+                            className="px-4 py-2 rounded-xl bg-neutral-200 text-neutral-800 cursor-pointer font-semibold w-1/2"
                         >
                             Cancelar
                         </button>
@@ -113,12 +114,12 @@ export default function PostBar({
             <div
                 className={`
                     sticky top-0 z-10 flex items-center justify-between w-full px-4 py-2 
-                    bg-white border-b border-gray-200
-                    dark:bg-gray-800 dark:border-gray-700
+                    bg-white border-b border-neutral-200
+                    dark:bg-neutral-800 dark:border-neutral-700
                 `}
             >
                 <div className="post-bar flex items-center gap-2 w-full justify-between">
-                    <h1>Post Bar</h1>
+                    <h1>Novo pensamento</h1>
                     <div className="flex flex-row gap-2">
                         <button
                             type="button"
@@ -129,15 +130,13 @@ export default function PostBar({
                         >
                             <Trash2 size={16} className="" />
                         </button>
-                        <button
+                        <Link
                             type="button"
                             className="px-4 py-2 rounded-xl bg-black text-white cursor-pointer font-semibold"
-                            onClick={async () => {
-                                await publishState();
-                            }}
+                            href={`/p/${id}`}
                         >
-                            {publicPost ? "Tornar privado" : "Tornar público"}
-                        </button>
+                            Ver post
+                        </Link>
                     </div>
                 </div>
             </div>

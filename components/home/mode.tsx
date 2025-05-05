@@ -53,9 +53,9 @@ export default function ModeSelect({
 
                 option: `
                     !rounded-xl
-                    !hover:bg-gray-200
-                    cursor-pointer ![data-combobox-active="true"]:bg-gray-700 ![data-combobox-active="true"]:text-white
-                    !active:bg-gray-700 !active:text-white
+                    !hover:bg-neutral-200
+                    cursor-pointer ![data-combobox-active="true"]:bg-neutral-700 ![data-combobox-active="true"]:text-white
+                    !active:bg-neutral-700 !active:text-white
                     
                     !transition-all !duration-200 !ease-in-out
                 `,
@@ -75,7 +75,7 @@ export default function ModeSelect({
                         `,
 
                         input: `
-                            bg-white border !border-gray-300
+                            bg-white border !border-neutral-300
                             !rounded-xl
                             w-38 
                         `,
