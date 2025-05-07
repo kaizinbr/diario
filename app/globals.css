@@ -1,16 +1,53 @@
 @import "tailwindcss";
-@import '../styles/_variables.scss';
-@import '../styles/_keyframe-animations.scss';
+@import "../styles/_variables.scss";
+@import "../styles/_keyframe-animations.scss";
 @import "tw-animate-css";
+/* 
+@import "https://www.grillitype.com/styles.e91b3d46fef71711d686.css";
+
+@font-face {
+    font-family:Amer-Stand-Regular;
+    src:url(https://www.grillitype.com/assets/fonts/gt-america/GT-America-LCGV-Standard-Regular.woff2) format("woff2"),
+    url(https://www.grillitype.com/assets/fonts/gt-america/GT-America-LCGV-Standard-Regular.woff) format("woff"),
+    url(https://www.grillitype.com/assets/fonts/gt-america/GT-America-LCGV-Standard-Regular.ttf) format("truetype");
+    font-weight:400;
+    font-style:normal
+  } */
 
 @custom-variant dark (&:where(.dark, .dark *));
 
+:root {
+    --background: #F3F3F1;
+    --foreground: #171717;
+}
 
-.m_38a85659, .mantine-Popover-dropdown {
+@theme inline {
+    --color-background: var(--background);
+    --color-foreground: var(--foreground);
+    --font-sans: var(--font-geist-sans);
+    --font-mono: var(--font-geist-mono);
+    --color-main-green: #7ae582;
+}
+
+@media (prefers-color-scheme: dark) {
+    :root {
+        --background: #0a0a0a;
+        --foreground: #ededed;
+    }
+}
+
+body {
+    background: var(--background);
+    color: var(--foreground);
+    overflow: auto !important;
+}
+
+.m_38a85659,
+.mantine-Popover-dropdown {
     @apply !rounded-xl !shadow-lg border !border-neutral-300;
 }
 
-.m_396ce5cb  {
+.m_396ce5cb {
     @apply !rounded-xl !border-neutral-300;
 }
 .m_396ce5cb [aria-selected="true"] {
@@ -29,3 +66,8 @@
 .mantine-Combobox-option[data-combobox-active="true"] {
     @apply !bg-neutral-700 !text-white;
 }
+
+
+/* .card:first-child {
+    @apply group;
+} */

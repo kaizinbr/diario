@@ -17,11 +17,16 @@ export default async function Home() {
 
     const { data: posts, error } = await supabase
         .from("posts")
-        .select("*")
+        .select(
+            `*,
+            profiles!posts_author_id_fkey1(
+                *
+            )`
+        )
         .eq("author_id", user?.id)        
         .gte("created_at", startOfDay.toISOString()) // Maior ou igual ao início do dia
         .lt("created_at", endOfDay.toISOString()) // Menor que o final do dia
-        .order("created_at", { ascending: false })
+        .order("created_at", { ascending: true })
         .limit(30);
 
     if (error) {

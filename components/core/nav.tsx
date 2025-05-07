@@ -8,7 +8,7 @@ import { AnimatePresence, motion } from "motion/react";
 
 import { useState, useCallback, useEffect } from "react";
 import { createClient } from "@/utils/supabase/client";
-import { User, Settings, LogOut, ChevronUp, Home, Folder } from "lucide-react";
+import { Settings, LogOut, ChevronUp, Home, Folder } from "lucide-react";
 
 import useScrollDirection from "@/hooks/useScrollDirection";
 
@@ -20,6 +20,7 @@ export default function Navigator({ user }: { user: UserType | null }) {
     const pathname = usePathname();
     const supabase = createClient();
 
+    const [full_name, setFullName] = useState<string | null>(null);
     const [username, setUsername] = useState<string | null>(null);
     const [avatar_url, setAvatarUrl] = useState<string | null>(null);
     const scrollDirection = useScrollDirection();
@@ -40,6 +41,7 @@ export default function Navigator({ user }: { user: UserType | null }) {
             }
 
             if (data) {
+                setFullName(data.full_name);
                 setUsername(data.username);
                 setAvatarUrl(data.avatar_url);
             }
@@ -54,7 +56,6 @@ export default function Navigator({ user }: { user: UserType | null }) {
         } else {
             console.log("User not found!");
         }
-
     }, [user, getProfile]);
 
     useEffect(() => {
@@ -69,7 +70,7 @@ export default function Navigator({ user }: { user: UserType | null }) {
         return () => {
             window.removeEventListener("scroll", handleScroll);
         };
-    })
+    });
 
     return (
         <div className="relative w-full flex justify-center">
@@ -80,7 +81,7 @@ export default function Navigator({ user }: { user: UserType | null }) {
                     opacity: 1,
                     bottom: scrollDirection > "down" ? "16px" : "-100px",
                     y: 0,
-                    width: isExpanded ? "270px" : "248px",
+                    // width: isExpanded ? "100%" : "296px",
                 }}
                 exit={{ scale: 0.9, opacity: 0, bottom: "-100px", y: 20 }}
                 transition={{
@@ -91,7 +92,7 @@ export default function Navigator({ user }: { user: UserType | null }) {
                     duration: 0.3,
                 }}
                 className={`
-                    fixed
+                    fixed bottom-6 w-74
                     transition-all duration-300 z-[999]
                     mx-auto flex items-center justify-evenly
                     backdrop-blur-xl
@@ -103,123 +104,163 @@ export default function Navigator({ user }: { user: UserType | null }) {
             >
                 {user ? (
                     <motion.div
-                    initial={{ height: "auto" }}
-                    animate={{
-                        height: isExpanded ? "300px" : "44px",
-                        // opacity: isExpanded ? 1 : 0.9,
-                    }}
-                    transition={{
-                        type: "spring", // Usa spring para um efeito mais fluido
-                        stiffness: 200, // Controla a rigidez da mola
-                        damping: 20, // Controla o amortecimento (quanto menor, mais "pulante")
-                        bounce: 0.3, // Adiciona o efeito de "overshoot"
-                        duration: 0.5, // Duração da animação
-                    }}
-                    className="w-full overflow-hidden flex flex-col items-center relative"
-                >
-                    <AnimatePresence>
-                        {isExpanded && (
-                            <motion.div
-                                initial={{ opacity: 0, scale: 0.95 }}
-                                animate={{ opacity: 1, scale: 1 }}
-                                exit={{ opacity: 0, scale: 0.95 }}
-                                transition={{ duration: 0.3 }}
-                                className="flex flex-row flex-wrap items-center gap-3 w-full"
-                            >
-                                <Link
-                                    href="/"
-                                    className={`
-                                            bg-neutral-200 text-black rounded-xl text-xs
-                                            p-2 size-18 flex flex-col items-center gap-1 justify-center 
-                                            hover:bg-neutral-300 transition-colors duration-200 ease-in-out
-                                        `}
+                        initial={{ height: "auto" }}
+                        animate={{
+                            height: isExpanded ? "300px" : "40.8px",
+                            // opacity: isExpanded ? 1 : 0.9,
+                        }}
+                        transition={{
+                            type: "spring", // Usa spring para um efeito mais fluido
+                            stiffness: 200, // Controla a rigidez da mola
+                            damping: 20, // Controla o amortecimento (quanto menor, mais "pulante")
+                            bounce: 0.3, // Adiciona o efeito de "overshoot"
+                            duration: 0.5, // Duração da animação
+                        }}
+                        className="w-full overflow-hidden flex flex-col items-center relative"
+                    >
+                        <AnimatePresence>
+                            {isExpanded && (
+                                <motion.div
+                                    initial={{ opacity: 0, scale: 0.95 }}
+                                    animate={{ opacity: 1, scale: 1 }}
+                                    exit={{ opacity: 0, scale: 0.95 }}
+                                    transition={{ duration: 0.3 }}
+                                    className="flex flex-row flex-wrap items-center gap-3 w-full"
                                 >
-                                    <Home className="h-4" />
-                                    Home
-                                </Link>
-                                <Link
-                                    href="#"
-                                    className={`
+                                    <Link
+                                        onClick={() =>
+                                            setIsExpanded(!isExpanded)
+                                        }
+                                        href="/me"
+                                        className={`
                                             bg-neutral-200 text-black rounded-xl text-xs
-                                            p-2 size-18 flex flex-col items-center gap-1 justify-center 
-                                            hover:bg-neutral-300 transition-colors duration-200 ease-in-out
+                                            p-2 w-full flex flex-row items-center gap-1 justify-start 
+                                            hover:bg-neutral-300 transition-all duration-200 ease-in-out
                                         `}
-                                >
-                                    <Folder className="h-4" />
-                                    Organizar
-                                </Link>
-                                <Link
-                                    href="/me"
-                                    className={`
+                                    >
+                                        <AvatarBtn
+                                            avatar_url={avatar_url || ""}
+                                        />
+                                        <div className="flex flex-col justify-center">
+                                            <span className="text-xs font-semibold">
+                                                {full_name ? full_name : "Nome"}
+                                            </span>
+                                            <span className="text-[10px] font-light">
+                                                {username
+                                                    ? `@${username}`
+                                                    : "Perfil"}
+                                            </span>
+                                        </div>
+                                    </Link>
+                                    <Link
+                                        onClick={() =>
+                                            setIsExpanded(!isExpanded)
+                                        }
+                                        href="/"
+                                        className={`
                                             bg-neutral-200 text-black rounded-xl text-xs
-                                            p-2 size-18 flex flex-col items-center gap-1 justify-center 
-                                            hover:bg-neutral-300 transition-colors duration-200 ease-in-out
+                                            p-2 size-20.5 flex flex-col items-center gap-1 justify-center 
+                                            hover:bg-neutral-300 transition-all duration-200 ease-in-out
                                         `}
-                                >
-                                    <User className="h-4" />
-                                    Perfil
-                                </Link>
-                                <Link
-                                    href="/settings"
-                                    className={`
+                                    >
+                                        <Home className="h-4" />
+                                        Home
+                                    </Link>
+                                    <Link
+                                        onClick={() =>
+                                            setIsExpanded(!isExpanded)
+                                        }
+                                        href="#"
+                                        className={`
                                             bg-neutral-200 text-black rounded-xl text-xs
-                                            p-2 size-18 flex flex-col items-center gap-1 justify-center  
-                                            hover:bg-neutral-300 transition-colors duration-200 ease-in-out
+                                            p-2 size-20.5 flex flex-col items-center gap-1 justify-center 
+                                            hover:bg-neutral-300 transition-all duration-200 ease-in-out
                                         `}
-                                >
-                                    <Settings className="h-4" />
-                                    Config.
-                                </Link>
-                                <Link
-                                    href="/logout"
-                                    className={`
+                                    >
+                                        <Folder className="h-4" />
+                                        Organizar
+                                    </Link>
+
+                                    <Link
+                                        href="/settings"
+                                        className={`
                                             bg-neutral-200 text-black rounded-xl text-xs
-                                            p-2 size-18 flex flex-col items-center gap-1 justify-center 
-                                            hover:bg-neutral-300 transition-colors duration-200 ease-in-out
+                                            p-2 size-20.5 flex flex-col items-center gap-1 justify-center  
+                                            hover:bg-neutral-300 transition-all duration-200 ease-in-out
                                         `}
-                                >
-                                    <LogOut className="h-4" />
-                                    Sair
-                                </Link>
-                            </motion.div>
-                        )}
-                    </AnimatePresence>
-                    <div className="flex flex-row gap-3 absolute bottom-0 justify-between w-full">
-                        <button
-                            onClick={() => setIsExpanded(!isExpanded)}
-                            className={`
+                                    >
+                                        <Settings className="h-4" />
+                                        Config.
+                                    </Link>
+                                    <Link
+                                        onClick={() =>
+                                            setIsExpanded(!isExpanded)
+                                        }
+                                        href="/logout"
+                                        className={`
+                                            bg-red-200 text-black rounded-xl text-xs
+                                            p-2 w-full flex flex-col items-center gap-1 justify-center 
+                                            hover:bg-red-300 transition-all duration-200 ease-in-out
+                                        `}
+                                    >
+                                        <LogOut className="h-4" />
+                                        Sair
+                                    </Link>
+                                </motion.div>
+                            )}
+                        </AnimatePresence>
+                        <div className="flex flex-row gap-3 absolute bottom-0 justify-between w-full">
+                            <button
+                                onClick={() => setIsExpanded(!isExpanded)}
+                                className={`
                                 flex  cursor-pointer
-                                flex-row items-center gap-1
+                                flex-row items-center
                                 data-[active=true]:text-blue-celestial
                                 hover:text-blue-celestial
                                 transition-all duration-200 ease-in-out
                             `}
-                        >
-                            <AvatarBtn avatar_url={avatar_url || ""} />
-                            <ChevronUp
-                                className={`
+                            >
+                                <AvatarBtn avatar_url={avatar_url || ""} />
+                                <ChevronUp
+                                    className={`
                                     h-4 transition duration-200
                                     ${isExpanded ? "rotate-180" : "rotate-0"}
                                 `}
-                            />
-                        </button>
-                        <Link
-                            data-active={
-                                pathname === "/me" || pathname === `${username}`
-                            }
-                            href={"/add"}
-                            className={`
+                                />
+                            </button>
+                            <Link
+                                onClick={() => setIsExpanded(!isExpanded)}
+                                href={"/"}
+                                className={`
+                                cursor-pointer
+                                flex-row  gap-1
+                                data-[active=true]:text-blue-celestial
+                                hover:text-blue-celestial
+                                transition-all duration-200 ease-in-out
+                                bg-[#eea0ff] text-black rounded-xl text-xs
+                                w-[40.8px] flex items-center justify-center     
+                            `}
+                            >
+                                <Home className="h-4" />
+                            </Link>
+                            <Link
+                                onClick={() => setIsExpanded(!isExpanded)}
+                                href={"/add"}
+                                className={`
                                 flex cursor-pointer
                                 flex-col items-center gap-1
-                                bg-black rounded-xl text-white
+                                bg-[#7ae582] text-black font-semibold
+                                hover:bg-[#7ae582]/80 
+                                rounded-xl 
                                 px-6 py-2
                                 transition-all duration-200 ease-in-out
                             `}
-                        >
-                            Pensamento
-                        </Link>
-                    </div>
-                </motion.div>) : (
+                            >
+                                Pensamento
+                            </Link>
+                        </div>
+                    </motion.div>
+                ) : (
                     <div className="flex flex-row gap-3 items-center justify-center">
                         <Link
                             href="/login"

@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Geist, Geist_Mono, Mona_Sans } from "next/font/google";
 import "./globals.css";
 import '@mantine/core/styles.css';
 import '@mantine/dates/styles.css';
@@ -15,6 +15,11 @@ const geistSans = Geist({
 
 const geistMono = Geist_Mono({
     variable: "--font-geist-mono",
+    subsets: ["latin"],
+});
+
+const monaSans = Mona_Sans({
+    variable: "--font-mona-sans",
     subsets: ["latin"],
 });
 
@@ -34,12 +39,13 @@ export default function RootLayout({
                 <ColorSchemeScript />
             </head>
             <body
-                className={`${geistSans.variable} ${geistMono.variable} antialiased
-                !bg-[#F3F3F1] dark:bg-[#1A1B1E] text-black dark:text-[#F3F3F1]
-                transition-colors duration-200 ease-in-out
-                dark:[&_.mantine-Overlay-root]:bg-[#1A1B1E] dark:[&_.mantine-ModalBase-root]:bg-[#1A1B1E]
-                dark:[&_.mantine-ModalBase-root]:text-[#F3F3F1]
-                dark:[&_.mantine-ModalBase-root]:border-[#1A1B1E]
+                className={`${monaSans.variable} ${geistMono.variable} antialiased
+                    !bg-[#F3F3F1] dark:bg-[#1A1B1E] text-black dark:text-[#F3F3F1]
+                    min-h-screen pb-26
+                    transition-colors duration-200 ease-in-out
+                    dark:[&_.mantine-Overlay-root]:bg-[#1A1B1E] dark:[&_.mantine-ModalBase-root]:bg-[#1A1B1E]
+                    dark:[&_.mantine-ModalBase-root]:text-[#F3F3F1]
+                    dark:[&_.mantine-ModalBase-root]:border-[#1A1B1E]
                 `}
             >
                 <Providers>{children}</Providers>

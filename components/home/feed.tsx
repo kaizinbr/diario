@@ -69,7 +69,12 @@ export default function Feed({
             if (modeValue === "Todos os posts") {
                 const { data, error } = await supabase
                     .from("posts")
-                    .select("*")
+                    .select(
+                        `*,
+                        profiles!posts_author_id_fkey1(
+                            *
+                        )`
+                    )
                     .eq("author_id", userId)
                     .order("created_at", { ascending: false })
 
@@ -91,11 +96,16 @@ export default function Feed({
 
                 const { data, error } = await supabase
                     .from("posts")
-                    .select("*")
+                    .select(
+                        `*,
+                        profiles!posts_author_id_fkey1(
+                            *
+                        )`
+                    )
                     .eq("author_id", userId)
                     .gte("created_at", startOfDay.toISOString()) // Maior ou igual ao início do dia
                     .lt("created_at", endOfDay.toISOString()) // Menor que o final do dia
-                    .order("created_at", { ascending: false })
+                    .order("created_at", { ascending: true })
 
                 if (error) {
                     console.error("Error fetching posts:", error);
@@ -113,7 +123,7 @@ export default function Feed({
 
     return (
         <div className=" mt-8">
-            <h2 className="text-2xl font-bold mb-6">Posts</h2>
+            <h2 className="text-2xl font-bold mb-6">Seu diário de {new Date(dateValue).toLocaleDateString()}</h2>
             <div
                 className={`
                     flex flex-col w-full gap-4
