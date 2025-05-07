@@ -1,4 +1,4 @@
-import useToday from "@/hooks/today";
+// import useToday from "@/hooks/today";
 import { DateTime, Interval } from "luxon";
 
 export function getFutureRelativeTime(date: Date, today: Date): string {
@@ -32,9 +32,9 @@ export function getPastRelativeTime(date: Date, today: Date): string {
     const diffMinutes = Math.floor(diff / 1000 / 60);
     const diffHours = Math.floor(diffMinutes / 60);
     const diffDays = Math.floor(diffHours / 24);
-    const diffWeeks = Math.floor(diffDays / 7);
-    const diffMonths = Math.floor(diffDays / 30);
-    const diffYears = Math.floor(diffMonths / 12);
+    // const diffWeeks = Math.floor(diffDays / 7);
+    // const diffMonths = Math.floor(diffDays / 30);
+    // const diffYears = Math.floor(diffMonths / 12);
 
     // if (diffYears === 1) return "Ano passado";
     // if (diffYears > 0)
@@ -58,16 +58,16 @@ export function getPastRelativeTime(date: Date, today: Date): string {
     return "Agora";
 }
 
-export function displayPastRelativeTime( date : Date) {
-    const today = useToday();
-    const localDate = new Date(date.getTime() - date.getTimezoneOffset() * 60000);
-    const relativeTime = getPastRelativeTime(date, today);
-    // console.log("relativeTime", relativeTime);  
-    // console.log("localDate", localDate);
-    // console.log("today", today);
+// export function displayPastRelativeTime( date : Date) {
+//     const today = useToday();
+//     const localDate = new Date(date.getTime() - date.getTimezoneOffset() * 60000);
+//     const relativeTime = getPastRelativeTime(date, today);
+//     // console.log("relativeTime", relativeTime);  
+//     // console.log("localDate", localDate);
+//     // console.log("today", today);
 
-    return `${relativeTime}`;
-}
+//     return `${relativeTime}`;
+// }
 
 export function getShortPastRelativeTime(date: Date, today: Date): string {
     const diff = today.getTime() - date.getTime();
