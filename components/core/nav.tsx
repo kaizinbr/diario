@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { useRouter } from "next/navigation";
 // import { Indicator } from "@mantine/core";
 // import { Avatar } from "@mantine/core";
 import { AnimatePresence, motion } from "motion/react";
@@ -18,6 +19,7 @@ import AvatarBtn from "@/components/core/Avatar-btn";
 export default function Navigator({ user }: { user: UserType | null }) {
     // console.log(user)
     const pathname = usePathname();
+    const router = useRouter();
     const supabase = createClient();
 
     const [full_name, setFullName] = useState<string | null>(null);
@@ -127,11 +129,9 @@ export default function Navigator({ user }: { user: UserType | null }) {
                                     transition={{ duration: 0.3 }}
                                     className="flex flex-row flex-wrap items-center gap-3 w-full"
                                 >
-                                    <Link
-                                        onClick={() =>
-                                            setIsExpanded(!isExpanded)
-                                        }
-                                        href="/me"
+                                    <button
+                                        type="button"
+                                        onClick={() => setIsExpanded(false)}
                                         className={`
                                             bg-neutral-200 text-black rounded-xl text-xs
                                             p-2 w-full flex flex-row items-center gap-1 justify-start 
@@ -151,12 +151,13 @@ export default function Navigator({ user }: { user: UserType | null }) {
                                                     : "Perfil"}
                                             </span>
                                         </div>
-                                    </Link>
-                                    <Link
-                                        onClick={() =>
-                                            setIsExpanded(!isExpanded)
-                                        }
-                                        href="/"
+                                    </button>
+                                    <button
+                                        type="button"
+                                        onClick={() => {
+                                            setIsExpanded(false);
+                                            router.push("/");
+                                        }}
                                         className={`
                                             bg-neutral-200 text-black rounded-xl text-xs
                                             p-2 size-20.5 flex flex-col items-center gap-1 justify-center 
@@ -165,12 +166,13 @@ export default function Navigator({ user }: { user: UserType | null }) {
                                     >
                                         <Home className="h-4" />
                                         Home
-                                    </Link>
-                                    <Link
-                                        onClick={() =>
-                                            setIsExpanded(!isExpanded)
-                                        }
-                                        href="#"
+                                    </button>
+                                    <button
+                                        type="button"
+                                        onClick={() => {
+                                            setIsExpanded(false);
+                                            router.push("/");
+                                        }}
                                         className={`
                                             bg-neutral-200 text-black rounded-xl text-xs
                                             p-2 size-20.5 flex flex-col items-center gap-1 justify-center 
@@ -179,10 +181,14 @@ export default function Navigator({ user }: { user: UserType | null }) {
                                     >
                                         <Folder className="h-4" />
                                         Organizar
-                                    </Link>
+                                    </button>
 
-                                    <Link
-                                        href="/settings"
+                                    <button
+                                        type="button"
+                                        onClick={() => {
+                                            setIsExpanded(false);
+                                            router.push("/settings");
+                                        }}
                                         className={`
                                             bg-neutral-200 text-black rounded-xl text-xs
                                             p-2 size-20.5 flex flex-col items-center gap-1 justify-center  
@@ -191,11 +197,9 @@ export default function Navigator({ user }: { user: UserType | null }) {
                                     >
                                         <Settings className="h-4" />
                                         Config.
-                                    </Link>
+                                    </button>
                                     <Link
-                                        onClick={() =>
-                                            setIsExpanded(!isExpanded)
-                                        }
+                                        onClick={() => setIsExpanded(false)}
                                         href="/logout"
                                         className={`
                                             bg-red-200 text-black rounded-xl text-xs
@@ -228,9 +232,12 @@ export default function Navigator({ user }: { user: UserType | null }) {
                                 `}
                                 />
                             </button>
-                            <Link
-                                onClick={() => setIsExpanded(!isExpanded)}
-                                href={"/"}
+                            <button
+                                type="button"
+                                onClick={() => {
+                                    setIsExpanded(false);
+                                    router.push("/");
+                                }}
                                 className={`
                                 cursor-pointer
                                 flex-row  gap-1
@@ -242,10 +249,13 @@ export default function Navigator({ user }: { user: UserType | null }) {
                             `}
                             >
                                 <Home className="h-4" />
-                            </Link>
-                            <Link
-                                onClick={() => setIsExpanded(!isExpanded)}
-                                href={"/add"}
+                            </button>
+                            <button 
+                                type="button"
+                                onClick={() => {
+                                    setIsExpanded(false);
+                                    router.push("/add");
+                                }}
                                 className={`
                                 flex cursor-pointer
                                 flex-col items-center gap-1
@@ -257,7 +267,7 @@ export default function Navigator({ user }: { user: UserType | null }) {
                             `}
                             >
                                 Pensamento
-                            </Link>
+                            </button>
                         </div>
                     </motion.div>
                 ) : (
